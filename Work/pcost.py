@@ -15,24 +15,25 @@ def portfolio_value(filename):
     f = open(filename)
     rows = csv.reader(f)
     headers = next(rows)
-    prices = []
-    shares = []
+    total_cost = 0.0
+    record = []
     for rowno, row in enumerate(rows, start=1):
+        r = dict(zip(headers, row))
         try:
-            prices.append(float(row[1]))
-            shares.append(float(row[2]))
+            nshares = int(r['shares'])
+            price = float(r['price'])
+            total_cost += nshares * price
         except ValueError:
             print(f'Row {rowno}: Bad row: {row}')
-
-    prices_array = np.array(prices)
-    shares_array = np.array(shares)
-    values_array = prices_array * shares_array
-    total_value = np.sum(values_array)
-    print('Total portfolio valued at ${}'.format(total_value))
+        record.append(r)
+    print('Total portfolio valued at ${}'.format(total_cost))
     f.close()
 
-    return total_value
+    return total_cost, record
 
 
-print(portfolio_value('Data/missing.csv'))
+cost, record = portfolio_value('Data/portfoliodate.csv')
+
+print(cost)
+print(record)
 # Exercise 1.27
