@@ -66,6 +66,22 @@ for stock in port:
 
 gain = total_value - total_cost
 
-print('The current portfolio is valued at {}, with a current '
-      'gain(loss) of {}'.format(total_value, gain))
+print('The current portfolio is valued at {:.2f}, with a current '
+      'gain(loss) of {:.2f}'.format(total_value, gain))
+
+def mk_report(portfolio, prices):
+    report = []
+    for stock in portfolio:
+        r = (stock['name'], stock['shares'], prices[stock['name']],
+             prices[stock['name']]- stock['price'])
+        report.append(r)
+    return report
+
+report = mk_report(port, prices)
+headers = ('Name', 'Shares', 'Price', 'Change')
+print('%10s %10s %10s %10s' % headers)
+print(('-' * 10 + ' ') * len(headers))
+
+for r in report:
+    print('%10s %10d %10.2f %10.2f' % r)
 
