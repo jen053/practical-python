@@ -55,7 +55,7 @@ def cost_value_gain(portfolio, prices):
 
     return gain, total_value, total_cost
 
-# Exercise 2.9
+# Exercise 2.9 / 3.1-3.2
 def portfolio_report(portfolio, prices):
     """
     Program to take a given stock portfolio and prices to produce and print a report
