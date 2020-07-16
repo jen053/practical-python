@@ -55,22 +55,17 @@ def cost_value_gain(portfolio, prices):
     return gain, total_value, total_cost
 
 
-def mk_report(portfolio, prices):
+def portfolio_report(portfolio, prices):
     """
-    Program to take a given stock portfolio and prices and produce a report
+    Program to take a given stock portfolio and prices to produce and print a report
     """
     report = []
+
     for stock in portfolio:
         r = (stock['name'], stock['shares'], prices[stock['name']],
              prices[stock['name']] - stock['price'])
         report.append(r)
-    return report
 
-
-def print_report(report):
-    """
-    Prints a given portfolio report.
-    """
     headers = ('Name', 'Shares', 'Price', 'Change')
     print('%10s %10s %10s %10s' % headers)
     print(('-' * 10 + ' ') * len(headers))
@@ -78,11 +73,10 @@ def print_report(report):
     for r in report:
         print('%10s %10d %10.2f %10.2f' % r)
 
-    return None
+    return report
 
-    
+
 port = read_portfolio('Data/portfoliodate.csv')
 prices = read_prices('Data/prices.csv')
 curr_gain, curr_value, curr_cost = cost_value_gain(port, prices)
-curr_report = mk_report(port, prices)
-print_report(curr_report)
+curr_report = portfolio_report(port, prices)
