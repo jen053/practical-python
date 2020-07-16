@@ -1,7 +1,7 @@
 # report.py
 import csv
 
-
+# Exercise 2.4
 def read_portfolio(filename):
     """
     Program to read a stock portfolio contained in a .csv file of any format.
@@ -18,7 +18,7 @@ def read_portfolio(filename):
 
     return portfolio
 
-
+# Exercise 2.6
 def read_prices(filename_prices):
     """
     Program to read stock prices from a .csv file of any format.
@@ -34,7 +34,7 @@ def read_prices(filename_prices):
 
     return prices
 
-
+# Exercise 2.7
 def cost_value_gain(portfolio, prices):
     """
     Function that provides cost, value and gain for a given portfolio.
@@ -54,7 +54,7 @@ def cost_value_gain(portfolio, prices):
 
     return gain, total_value, total_cost
 
-
+# Exercise 2.9
 def portfolio_report(portfolio, prices):
     """
     Program to take a given stock portfolio and prices to produce and print a report
@@ -65,7 +65,7 @@ def portfolio_report(portfolio, prices):
         r = (stock['name'], stock['shares'], prices[stock['name']],
              prices[stock['name']] - stock['price'])
         report.append(r)
-
+    # Exercise 2.10 - 2.11
     headers = ('Name', 'Shares', 'Price', 'Change')
     print('%10s %10s %10s %10s' % headers)
     print(('-' * 10 + ' ') * len(headers))
