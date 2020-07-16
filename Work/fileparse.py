@@ -2,13 +2,14 @@
 import csv
 
 
-def parse_csv(filename, select=None, types=None, has_headers=True):
+def parse_csv(filename, select=None, types=None, has_headers=True, delimiter=','):
     """
     Parse a CSV file into a list of  records
     """
 
     with open(filename) as f:
-        rows = csv.reader(f)
+
+        rows = csv.reader(f, delimiter=delimiter)
 
         # Read the file headers
         headers = next(rows) if has_headers else []
@@ -20,7 +21,6 @@ def parse_csv(filename, select=None, types=None, has_headers=True):
             headers = select
         else:
             indices = []
-
         records = []
         for row in rows:
             if not row:
