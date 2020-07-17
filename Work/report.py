@@ -1,39 +1,26 @@
 # report.py
 import csv
+# Exercise 3.12
+import fileparse
+
 
 # Exercise 2.4
 def read_portfolio(filename):
     """
-    Program to read a stock portfolio contained in a .csv file of any format.
+    Program to read a stock portfolio contained in a .csv file.
+    Selects columns 'name', 'shares', and 'price' and converts
+    them respectively to date types str, int, and float.
     """
-    portfolio = []
-    with open(filename, 'rt') as f:
-        rows = csv.reader(f)
-        headers = next(rows)
-        for row in rows:
-            # Exercise 2.16
-            record = dict(zip(headers, row))
-            stock = {'name': record['name'], 'shares': int(record['shares']),
-                     'price': float(record['price'])}
-            portfolio.append(stock)
+    return fileparse.parse_csv(filename, select=['name', 'shares', 'price'], types=[str, int, float])
 
-    return portfolio
 
 # Exercise 2.6
 def read_prices(filename_prices):
     """
-    Program to read stock prices from a .csv file of any format.
+    Program to read stock prices from a .csv file.
     """
-    prices = {}
-    f = open(filename_prices, 'r')
-    rows = csv.reader(f)
-    for row in rows:
-        try:
-            prices[row[0]] = float(row[1])
-        except IndexError:
-            pass
+    return dict(fileparse.parse_csv(filename_prices, types=[str, float], has_headers=False))
 
-    return prices
 
 # Exercise 2.7
 def cost_value_gain(portfolio, prices):
@@ -54,6 +41,7 @@ def cost_value_gain(portfolio, prices):
           'gain(loss) of {:.2f}'.format(total_value, gain))
 
     return gain, total_value, total_cost
+
 
 # Exercise 2.9 / 3.1-3.2
 def portfolio_report(portfolio, prices):
