@@ -69,3 +69,22 @@ port = read_portfolio('Data/portfoliodate.csv')
 prices = read_prices('Data/prices.csv')
 curr_gain, curr_value, curr_cost = cost_value_gain(port, prices)
 curr_report = portfolio_report(port, prices)
+
+
+# Exercise 3.15. This is not exactly how it is done in the solutions because using the solutions, there is no data type
+# conversion completed and therefore everything in portfolio.csv and prices.csv is a string. So, I ran the
+# read_portfolio and read_prices on arg[1] and arg[2], respectively, first and passed their outputs into
+# portfolio_report.
+
+def main(args):
+    if len(args) != 3:
+        raise SystemExit('Usage: %s portfile pricefile' % args[0])
+    port = read_portfolio(args[1])
+    prices = read_prices(args[2])
+    portfolio_report(port, prices)
+
+
+if __name__ == '__main__':
+    import sys
+
+    main(sys.argv)
