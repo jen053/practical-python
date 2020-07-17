@@ -3,7 +3,7 @@ import csv
 
 
 # Exercise 3.3
-def parse_csv(filename, select=None, types=None, has_headers=True, delimiter=','):
+def parse_csv(filename, select=None, types=None, has_headers=True, delimiter=',', show_errors=False):
     """
     Parse a CSV file into a list of  records
     """
@@ -20,25 +20,32 @@ def parse_csv(filename, select=None, types=None, has_headers=True, delimiter=','
         # If a column selector was given, fine indices of the specified column.
         # Also narrow the set of headers used for resulting dictionaries.
         if select:
+            # Exercise 3.8
             if not has_headers:
-                # Exercise 3.8
                 raise RuntimeError('To select columns, file must have headers.')
             indices = [headers.index(colname) for colname in select]
             headers = select
         else:
             indices = []
         records = []
-        for row in rows:
+        for ronum, row in enumerate(rows, 1):
             if not row:
                 continue  # Skip rows with no data
             # Filter the row if specific columns were selected
-            if indices:
+            if select:
                 row = [row[index] for index in indices]
 
             # Exercise 3.5
             # Apply type conversion it types
             if types:
-                row = [func(val) for func, val in zip(types, row)]
+                # Exercise 3.9 - 3.10
+                try:
+                    row = [func(val) for func, val in zip(types, row)]
+                except ValueError as e:
+                    if not show_errors:
+                        print(f" Row {ronum}: couldn't convert {row}")
+                        print(f" Row {ronum}: reason {e}")
+                    continue
 
             # Create dictionary if headers, else contain rows within tuples
             if headers:
