@@ -15,6 +15,16 @@ def portfolio_value(filename):
     port = report.read_portfolio(filename)
     return sum([s['shares'] * s['price'] for s in port])
 
+# Exercise 3.15
+def main(args):
+    if len(args) != 2:
+        raise SystemExit('Usage: %s portfoliofile' % args[0])
+    portfolio_value(args[1])
+
+
+if __name__ == '__main__':
+    import sys
+    main(sys.argv)
 
 cost = portfolio_value('Data/portfoliodate.csv')
 print(cost)
