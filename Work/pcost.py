@@ -21,11 +21,11 @@ def main(args):
         raise SystemExit('Usage: %s portfoliofile' % args[0])
     portfolio_value(args[1])
 
-
+# Exercise 3.16
 if __name__ == '__main__':
     import sys
     main(sys.argv)
 
 cost = portfolio_value('Data/portfoliodate.csv')
-print(cost)
+print('Total cost: {}'.format(cost))
 # Exercise 1.27
