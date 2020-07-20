@@ -76,6 +76,7 @@ curr_report = portfolio_report(port, prices)
 # read_portfolio and read_prices on arg[1] and arg[2], respectively, first and passed their outputs into
 # portfolio_report.
 
+# Exercise 3.15
 def main(args):
     if len(args) != 3:
         raise SystemExit('Usage: %s portfile pricefile' % args[0])
@@ -83,8 +84,7 @@ def main(args):
     prices = read_prices(args[2])
     portfolio_report(port, prices)
 
-
+# Exercise 3.16
 if __name__ == '__main__':
     import sys
-
     main(sys.argv)
