@@ -11,7 +11,9 @@ def read_portfolio(filename):
     Selects columns 'name', 'shares', and 'price' and converts
     them respectively to date types str, int, and float.
     """
-    return fileparse.parse_csv(filename, select=['name', 'shares', 'price'], types=[str, int, float])
+    # Exercise 3.18
+    with open(filename) as lines:
+        return fileparse.parse_csv(lines, select=['name', 'shares', 'price'], types=[str, int, float])
 
 
 # Exercise 2.6
@@ -19,7 +21,9 @@ def read_prices(filename_prices):
     """
     Program to read stock prices from a .csv file.
     """
-    return dict(fileparse.parse_csv(filename_prices, types=[str, float], has_headers=False))
+    # Exercise 3.18
+    with open(filename_prices) as lines:
+        return dict(fileparse.parse_csv(lines, types=[str, float], has_headers=False))
 
 
 # Exercise 2.7
@@ -85,6 +89,7 @@ def main(args):
     portfolio_report(port, prices)
 
 # Exercise 3.16
+
 if __name__ == '__main__':
     import sys
     main(sys.argv)
